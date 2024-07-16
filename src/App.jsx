@@ -26,7 +26,7 @@ const [loading,setLoading] = useState(true)
 
   return !loading?(<div className='min-h-screen text-center flex-wrap bg-rose-100'> 
   <Header></Header>
-   <main>
+   <main className='min-h-[600px]'>
     <Outlet/>
   </main>
 <Footer></Footer>

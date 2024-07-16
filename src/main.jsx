@@ -12,6 +12,7 @@ import Home from './pages/Home.jsx'
 import AddPost from './pages/AddPost.jsx'
 import Post from './pages/Post.jsx'
 import EditPost from './pages/EditPost.jsx'
+import AllTasks from './pages/AllTasks.jsx'
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,14 @@ const router = createBrowserRouter([
         element: (
             <AuthLayout authentication >
                 <EditPost/>
+            </AuthLayout>
+        ),
+      },
+      {
+        path: "/taskboard",
+        element: (
+            <AuthLayout authentication >
+                <AllTasks/>
             </AuthLayout>
         ),
       }
