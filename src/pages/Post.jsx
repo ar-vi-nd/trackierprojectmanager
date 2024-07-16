@@ -97,7 +97,7 @@ export default function Post() {
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
 
                 
-                        <div className="absolute right-6 top-6">
+                        <div className="absolute right-6 -top-2">
                             <Link to={`/editproject/${project._id}`}>
                                 <Button bgColor="bg-green-500" className="mr-3 hover:bg-green-600 duration-200 hover:scale-105">
                                     Edit
