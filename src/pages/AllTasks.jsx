@@ -17,7 +17,7 @@ const AllTasks = () => {
 
     useEffect(()=>{
         getAllTasks().then((data)=>{
-            console.log(data)
+            // console.log(data)
             const taskObj = {
                 backlog : data?.data?.filter((task)=>(task.taskStatus === "Backlog")),
                 inDiscussion : data?.data?.filter((task)=>(task.taskStatus ==="In Discussion")),

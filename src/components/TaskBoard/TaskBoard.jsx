@@ -18,7 +18,7 @@ const TaskBoard= ({tasks,handleUpdateTask}) => {
 const Column = ({title , tasks , handleUpdateTask }) => (
   <div className="bg-gray-100 p-4 rounded-md">
     <h2 className="text-xl font-bold mb-4">{title}</h2>
-    {tasks&&tasks.map((task, index) => (
+    {tasks?.length===0?"No tasks yet":tasks?.map((task, index) => (
       <TaskCard handleUpdateTask={handleUpdateTask} key={index} {...task} />
     ))}
   </div>

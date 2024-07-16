@@ -17,9 +17,11 @@ function Home() {
         // })
 
         getAllProjects().then((data)=>{
-            console.log(data?.data)
+            // console.log(data?.data)
             setProjects(data?.data)
-            setLoading(false)
+            if(data?.success){
+                setLoading(false)
+            }
         })
 
      
@@ -42,7 +44,7 @@ function Home() {
         )
     }
   
-    else if (projects.length === 0) {
+    else if (projects?.length === 0) {
         return (
             <div className="w-full py-8 mt-4 text-center">
                 <Container>

@@ -26,7 +26,7 @@ const PostForm = ({project}) => {
     const formSubmitHandler = async (data)=>{
         try {
             setError(null)
-            console.log(data)
+            // console.log(data)
             if(!project){
 
               const response = await addProject(data)

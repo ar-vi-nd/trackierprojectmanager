@@ -24,7 +24,7 @@ const Signup = () => {
     const formSubmitHandler = async(data)=>{
         setError(null)
         try {
-            console.log(data)
+            // console.log(data)
             const response = await userSignup(data)
             console.log(response)
             if(response.success){

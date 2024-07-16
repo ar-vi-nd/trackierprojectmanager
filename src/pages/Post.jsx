@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Button, Container, TaskBoard } from "../components";
-import { useSelector } from "react-redux";
 import { deleteProjectById, getProjectById } from "../apirequests/projects";
 import {TaskForm} from "../components";
 import { addTask, updateTask } from "../apirequests/tasks";
@@ -25,9 +24,9 @@ export default function Post() {
 
     const handleSaveTask = (newTask) => {
 
-        console.log(newTask)
+        // console.log(newTask)
         addTask({...newTask,project:slug}).then((data)=>{
-            console.log(data)
+            // console.log(data)
             if(data.success){
                 setForcedUpdate((prev)=>!prev)
             }
@@ -36,7 +35,7 @@ export default function Post() {
             }
             
         }).catch((err)=>{
-            console.log(err)
+            // console.log(err)
             setError(err)
         })
 
@@ -44,7 +43,7 @@ export default function Post() {
 
     const handleUpdateTask = async(taskId)=>{
         updateTask(taskId).then((data)=>{
-            console.log(data)
+            // console.log(data)
             if(data.success){
                 setForcedUpdate((prev)=>!prev)
             }
@@ -63,7 +62,7 @@ export default function Post() {
 
         getProjectById(slug)
         .then((data)=>{
-            console.log(data)
+            // console.log(data)
             setProject(data?.data)
             const taskObj = {
                 backlog : data?.data?.taskList.filter((task)=>(task.taskStatus === "Backlog")),
@@ -82,7 +81,7 @@ export default function Post() {
     const deletePost = () => {
         if(slug){
             deleteProjectById(slug).then((data)=>{
-                console.log(data)
+                // console.log(data)
                 if(data?.success){
                     navigate('/')
                 }
@@ -100,11 +99,11 @@ export default function Post() {
                 
                         <div className="absolute right-6 top-6">
                             <Link to={`/editproject/${project._id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
+                                <Button bgColor="bg-green-500" className="mr-3 hover:bg-green-600 duration-200 hover:scale-105">
                                     Edit
                                 </Button>
                             </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
+                            <Button bgColor="bg-red-500" className="hover:bg-red-600 duration-200 hover:scale-105" onClick={deletePost}>
                                 Delete
                             </Button>
                         </div>
@@ -116,7 +115,7 @@ export default function Post() {
                     Project Description : {project?.projectDescription}
                     </div>
 
-                <div className=" text-2xl mb-6"> <h1 className="text-2xl font-bold"> Project Manager : {project?.projectUser?.fullName}</h1></div>
+                <div className=" text-2xl mb-6"> <h1 className="text-2xl font-bold"> Project Manager : {project?.projectUser?.fullName?.toUpperCase()}</h1></div>
                 <div className="text-2xl mb-6">Created On : {new Date(project?.projectUser?.createdAt).toLocaleDateString()}</div>
 
 
@@ -126,7 +125,7 @@ export default function Post() {
           <div className="flex justify-between items-center mb-4">
             <h1 className="text-2xl font-bold">Task Board</h1>
             <button 
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 hover:scale-105 duration-200"
               onClick={handleAddNewTask}
             >
               Add New Task

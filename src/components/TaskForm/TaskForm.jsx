@@ -5,10 +5,11 @@ const TaskForm = ({ onClose, onSave }) => {
   const [taskDescription, setTaskDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [tags, setTags] = useState('');
+  const [assignedTo,setAssignedTo] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ taskName, taskDescription, dueDate, tags });
+    onSave({ taskName, taskDescription, dueDate, tags, assignedTo });
     onClose();
   };
 
@@ -23,7 +24,7 @@ const TaskForm = ({ onClose, onSave }) => {
               type="text"
               value={taskName}
               onChange={(e) => setTaskName(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2"
               required
             />
           </div>
@@ -32,8 +33,17 @@ const TaskForm = ({ onClose, onSave }) => {
             <textarea
               value={taskDescription}
               onChange={(e) => setTaskDescription(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2"
               required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Assigned To</label>
+            <input
+              type="text"
+              value={assignedTo}
+              onChange={(e) => setAssignedTo(e.target.value)}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2"
             />
           </div>
           <div className="mb-4">
@@ -42,7 +52,7 @@ const TaskForm = ({ onClose, onSave }) => {
               type="date"
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2"
               required
             />
           </div>
@@ -52,7 +62,7 @@ const TaskForm = ({ onClose, onSave }) => {
               type="text"
               value={tags}
               onChange={(e) => setTags(e.target.value)}
-              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm p-2"
             />
           </div>
           <div className="flex justify-end">

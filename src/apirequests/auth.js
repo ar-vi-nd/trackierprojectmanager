@@ -1,7 +1,7 @@
 const userSignup = async({email,password,name})=>{
     try {
         console.log(email,password,name)
-        const response = await fetch(`http://127.0.0.1:8000/api/v1/users/signup`, {
+        const response = await fetch(`https://trackier-assignment.vercel.app/api/v1/users/signup`, {
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             headers: {
               "Content-Type": "application/json",
@@ -24,13 +24,12 @@ const userSignup = async({email,password,name})=>{
 const userLogin = async({email,password})=>{
   try {
       console.log(email,password)
-      const response = await fetch(`http://127.0.0.1:8000/api/v1/users/login`, {
+      const response = await fetch(`https://trackier-assignment.vercel.app/api/v1/users/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body:JSON.stringify({email:email,password:password}),
-          credentials: "include",
         });
         const jsondata = await response.json()
         console.log(jsondata)
@@ -44,14 +43,12 @@ const userLogin = async({email,password})=>{
 const userLogout = async () => {
     try {
         let token = localStorage.getItem('token')
-      const response = await fetch(`http://127.0.0.1:8000/api/v1/users/logout`, {
+      const response = await fetch(`https://trackier-assignment.vercel.app/api/v1/users/logout`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           "Authorization":`Bearer ${token}`
-        },
-        credentials: "include", // Ensure credentials are included
-      });
+        }      });
       
       if (response.ok) {
         const jsondata =await response.json()

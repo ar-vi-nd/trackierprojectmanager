@@ -34,7 +34,7 @@ const Login = () => {
         try {
             setError(null)
             const userData = await userLogin(body)
-            console.log(userData)
+            // console.log(userData)
             if(userData.success){
                 dispatch(login(userData.data.user))
                 localStorage.setItem("token",userData?.data?.accessToken)

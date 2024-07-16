@@ -13,10 +13,12 @@ const Protected = ({children,authentication = "true"}) => {
  
     useEffect(()=>{
       if(authentication && authentication!== authStatus){
+        // console.log("here")
         navigate("/login")
     }
-    else if(!authentication && authentication !== authStatus)
+    else if(!authentication && authentication !== authStatus){
       navigate("/")
+    }
     setLoader(false)
     },[authStatus,authentication,navigate])
   return (

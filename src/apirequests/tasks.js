@@ -1,17 +1,16 @@
-const addTask = async({taskName,taskDescription,dueDate,project,tags})=>{
+const addTask = async({taskName,taskDescription,dueDate,project,tags,assignedTo})=>{
 
-    console.log(taskName,taskDescription,dueDate,project,tags)
+    console.log(taskName,taskDescription,dueDate,project,tags,assignedTo)
     try {
         let token = localStorage.getItem('token')
-        const response = await fetch(`http://127.0.0.1:8000/api/v1/tasks`, {
+        const response = await fetch(`https://trackier-assignment.vercel.app/api/v1/tasks`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
           "Authorization":`Bearer ${token}`
 
             },
-            body:JSON.stringify({taskName,taskDescription,dueDate,project,tags}),
-            credentials: "include",
+            body:JSON.stringify({taskName,taskDescription,dueDate,project,tags,assignedTo}),
           });
           const jsondata = await response.json()
           console.log(jsondata)
@@ -24,14 +23,13 @@ const addTask = async({taskName,taskDescription,dueDate,project,tags})=>{
 const updateTask = async(taskId)=>{
     try {
         let token = localStorage.getItem('token')
-        const response = await fetch(`http://127.0.0.1:8000/api/v1/tasks/${taskId}`, {
+        const response = await fetch(`https://trackier-assignment.vercel.app/api/v1/tasks/${taskId}`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
           "Authorization":`Bearer ${token}`
 
             },
-            credentials: "include",
           });
           const jsondata = await response.json()
           console.log(jsondata)
@@ -44,14 +42,13 @@ const updateTask = async(taskId)=>{
 const getAllTasks = async()=>{
     try {
         let token = localStorage.getItem('token')
-        const response = await fetch(`http://127.0.0.1:8000/api/v1/tasks/`, {
+        const response = await fetch(`https://trackier-assignment.vercel.app/api/v1/tasks/`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
           "Authorization":`Bearer ${token}`
 
             },
-            credentials: "include",
           });
           const jsondata = await response.json()
           console.log(jsondata)
