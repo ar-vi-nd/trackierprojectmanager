@@ -6,5 +6,8 @@ import Signup from "./Signup/Signup";
 import Button from "./Button/Button"
 import Input from "./Input/Input";
 import Footer from "./Footer/Footer"
+import Login from "./Login/Login"
+import PostCard from "./PostCard/PostCard";
+import PostForm from "./PostForm/PostForm";
 
-export{Header,Container,Logo,AuthLayout,Signup,Button,Input,Footer}
+export{Header,Container,Logo,AuthLayout,Signup,Button,Input,Footer,Login , PostCard,PostForm}

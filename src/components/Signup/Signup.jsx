@@ -4,6 +4,7 @@ import { login } from '../../store/authSlice'
 import {Link, useNavigate } from 'react-router-dom'
 import {Logo,Button,Input} from "../index"
 import {useForm} from 'react-hook-form'
+import { userSignup } from '../../apirequests/auth'
 
 
 
@@ -21,28 +22,21 @@ const Signup = () => {
 
 
     const formSubmitHandler = async(data)=>{
-        // setError(null)
-        // try {
-        //     console.log(data)
-        //     const session = await authService.createAccount(data)
-        //     console.log(session)
-        //     if(session){
-        //         console.log("inside if")
-        //         const userData = await authService.getCurrentUser()
-
-        //         console.log(userData)
-
-        //         if (userData){
-        //             console.log("inside if if")
-        //             dispatch(login(userData))
-        //             navigate("/")
-        //         }
-        //     }
+        setError(null)
+        try {
+            console.log(data)
+            const response = await userSignup(data)
+            console.log(response)
+            if(response.success){
+                navigate("/login")
+            }else{
+                throw response
+            }
             
-        // } catch (error) {
-        //     console.log("Error submitting form to create user ,",error.message)
-        //     setError(error)
-        // }
+        } catch (error) {
+            console.log("Error submitting form to create user ,",error.message)
+            setError(error)
+        }
     }
 
     const validationErrorHandler = (error)=>{
@@ -79,7 +73,7 @@ const Signup = () => {
                 <div className='space-y-5'>
 
                 <div className='min-h-8 mt-5'>
-            {error?.message && <p className="text-red-600 text-center ">{error.message}</p>}
+            {error?.errmessage && <p className="text-red-600 text-center ">{error.errmessage}</p>}
 
             </div>
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import authService from '../../appwrite/auth'
+// import authService from '../../appwrite/auth'
 import { useDispatch } from 'react-redux'
 import { login } from '../../store/authSlice'
 import {Link, useNavigate } from 'react-router-dom'
@@ -7,6 +7,7 @@ import {Logo,Input} from '../index'
 import Button from '../Button/Button'
 
 import {useForm} from 'react-hook-form'
+import { userLogin } from '../../apirequests/auth'
 
 
 
@@ -31,20 +32,20 @@ const Login = () => {
 
     const formSubmitHandler = async(body)=>{
         try {
-
-            // console.log("inside form submit handler")
             setError(null)
-            const session = await authService.userLogin(body)
-            if(session){
-                const userData = await authService.getCurrentUser()
-                // console.log(userData)
-                if(userData){
-                    console.log("here")
-                    dispatch(login(userData))
-                    navigate('/')
-                }
+            const userData = await userLogin(body)
+            console.log(userData)
+            if(userData.success){
+                dispatch(login(userData.data.user))
+                localStorage.setItem("token",userData?.data?.accessToken)
+                localStorage.setItem("myState",JSON.stringify(userData.data.user))
+                navigate("/")
             }
-        } catch (error) {
+            else{
+                throw userData
+            }
+            }
+             catch (error) {
             console.log("Error submitting form ",error)
             setError(error)
         }
@@ -55,13 +56,6 @@ const Login = () => {
         setError(error)
     }
 
-    const handleOAuthLogin = ()=>{
-        try {
-         authService.oAuthLogin()
-        } catch (error) {
-            console.log("error logging using oAuth ",error)
-        }
-    }
 
 
     return (
@@ -87,7 +81,7 @@ const Login = () => {
             <form onSubmit={handleSubmit(formSubmitHandler,validationErrorHandler)} className='mt-8'>
                 
             <div className='min-h-8 mt-5'>
-            {error?.message && <p className="text-red-600 text-center ">{error.message}</p>}
+            {error?.errmessage && <p className="text-red-600 text-center ">{error.errmessage}</p>}
 
             </div>
 
@@ -133,7 +127,6 @@ const Login = () => {
                 </div>
             </form>
             
-                    <Button type='button' className='w-full mt-2 bg-white' textColor='text-black' disabled={isSubmitting} onClick={handleOAuthLogin}> Sign In With Google</Button>
             </div>
         </div>
       )
