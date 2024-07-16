@@ -4,7 +4,7 @@ import {Input,Button} from "../index"
 import { useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux' 
 import { useEffect } from 'react'
-import { addProject } from '../../apirequests/projects';
+import { addProject, updateProject } from '../../apirequests/projects';
 
 // let rerenderval = 0;
 
@@ -27,13 +27,33 @@ const PostForm = ({project}) => {
         try {
             setError(null)
             console.log(data)
-            const response = await addProject(data)
-            console.log(response)
+            if(!project){
+
+              const response = await addProject(data)
+              console.log(response)
+              if(response?.success){
+                navigate("/")
+
+              }else{
+                throw response
+              }
+            }
+            else{
+              const response = await updateProject({...data,id:project?._id})
+              console.log(response)
+              if(response?.success){
+                navigate("/")
+
+              }else{
+                throw response
+              }
+            }
 
 
         } catch (error) {
             
             console.log("Error Creating Project ", error)
+            setError(error)
         }
     }
 
@@ -46,6 +66,11 @@ const PostForm = ({project}) => {
     <form onSubmit={handleSubmit(formSubmitHandler,validationErrorHandler)} className='flex flex-wrap'>
         
         <div>
+
+        <div className='min-h-8 mt-5'>
+            {error?.errmessage && <p className="text-red-600 text-center ">{error.errmessage}</p>}
+
+            </div>
             <Input
             label = "Project Name"
             placeholder = "Enter Project Name"
