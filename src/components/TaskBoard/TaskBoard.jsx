@@ -16,7 +16,7 @@ const TaskBoard= ({tasks,handleUpdateTask}) => {
     };
 
 const Column = ({title , tasks , handleUpdateTask }) => (
-  <div className="bg-gray-100 p-4 rounded-md">
+  <div className={` bg-gray-100 p-4 rounded-md ${title==="Backlog"?"bg-orange-100":""} ${title==="In Discussion"?"bg-red-100":""} ${title==="In Progress"?"bg-green-100":""} ${title==="Done"?"bg-cyan-100":""}`}>
     <h2 className="text-xl font-bold mb-4">{title}</h2>
     {tasks?.length===0?"No tasks yet":tasks?.map((task, index) => (
       <TaskCard handleUpdateTask={handleUpdateTask} key={index} {...task} />
