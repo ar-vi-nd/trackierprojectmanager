@@ -81,13 +81,20 @@ const Signup = () => {
                         required : {
                             value:true,
                             message: "Full Name cannot be empty"
+                        },
+                        minLength: {
+                            value: 3,
+                            message: "Full Name must be at least 3 characters"
+                        },
+                        validate: {
+                            noLeadingTrailingWhitespace: (value) => value.trim().length ===value.length || "Full Name cannot have only leading or trailing white spaces"
                         }
                     })}>
                     </Input>
 
                     
                     <div className=' text-red-500 min-h-8'>
-                        {error&&error.fullname?.message}
+                        {error&&error.name?.message}
                     </div>
 
                     <Input label = "Email : " type= "email" placeholder = "Enter your email" {...register("email",{
@@ -112,9 +119,17 @@ const Signup = () => {
                         placeholder="Enter your password"
                         {...register("password", {
                             required: {
-                                value:true,
-                                message:"Password cannot be empty"
-                            },})}
+                                value: true,
+                                message: "Password cannot be empty"
+                            },
+                            minLength: {
+                                value: 6,
+                                message: "Password must be at least 6 characters"
+                            },
+                            validate: {
+                                noWhiteSpace: (value) => !/\s/.test(value) || "Password cannot contain white spaces"
+                            }
+                        })}
                         />
 
                     <div className=' text-red-500 min-h-8'>

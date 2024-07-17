@@ -75,22 +75,26 @@ const PostForm = ({project}) => {
             label = "Project Name"
             placeholder = "Enter Project Name"
             className = "mb-4"
-            {...register('projectName',{required:{value:true,message:"Project Name required"}})}
+            {...register('projectName',{required:{value:true,message:"Project Name required"},validate: {
+              noLeadingTrailingWhitespace: (value) => value.trim().length ===value.length || "Project Name cannot have only leading or trailing white spaces"
+          }})}
             
             />
-            <div className='bg-red-500 color-white'>{error&&error.projectName?.message}</div>
+            <div className=' text-red-500 h-6'>{error&&error.projectName?.message}</div>
             <Input
             label = "Project Description"
             placeholder = "Enter Project Description"
             className = "mb-4"
-            {...register('projectDescription',{required:{value:true,message:"Project Description required"}})}
+            {...register('projectDescription',{required:{value:true,message:"Project Description required"},validate: {
+              noLeadingTrailingWhitespace: (value) => value.trim().length ===value.length || "Project Description cannot have only leading or trailing white spaces"
+          }})}
             
             />
-            <div className='bg-red-500 color-white'>{error&&error.projectDescription?.message}</div>
+            <div className=' text-red-500 h-6'>{error&&error.projectDescription?.message}</div>
 
 
 
-            <div className='w-1/3 px-2'>
+            <div className='w-1/3 px-2 mt-2'>
             <Button type="submit" bgColor={project ? "bg-green-500" : undefined} className="w-full" disabled={isSubmitting}>
                     {project ? "Update" : "Submit"}
                 </Button>
